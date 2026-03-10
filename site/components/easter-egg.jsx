@@ -29,7 +29,7 @@ export default function EasterEgg() {
       return feedback;
     }
 
-    return "A tiny hidden panel for curious people.";
+    return "";
   }, [feedback, status]);
 
   function handleTrigger() {
@@ -100,8 +100,7 @@ export default function EasterEgg() {
         <div className="portrait-card portrait-face portrait-back" aria-hidden={!isOpen}>
           <div className="easter-panel-head">
             <div>
-              <p className="easter-label">field note 001</p>
-              <h2 className="easter-title">you found it.</h2>
+              <h2 className="easter-title">hi, you found it</h2>
             </div>
             <button
               className="easter-close"
@@ -114,7 +113,7 @@ export default function EasterEgg() {
           </div>
 
           <p className="easter-copy">
-            Small, slightly hidden things are usually more interesting. If you want, say hi.
+            You made it to the hidden side. Say hi if you want.
           </p>
 
           <form className="easter-form" onSubmit={handleSubmit}>
