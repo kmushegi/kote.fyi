@@ -17,36 +17,46 @@ function getPreferredTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function applyTheme(nextTheme, persist = false) {
+  const root = document.documentElement;
+
+  root.classList.add("theme-changing");
+  root.dataset.theme = nextTheme;
+  root.style.colorScheme = nextTheme;
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content", nextTheme === "dark" ? "#111512" : "#f5efe4");
+
+  if (persist) {
+    window.localStorage.setItem(storageKey, nextTheme);
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      root.classList.remove("theme-changing");
+    });
+  });
+}
+
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const applyTheme = (nextTheme, persist = false) => {
-      document.documentElement.dataset.theme = nextTheme;
-      document.documentElement.style.colorScheme = nextTheme;
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.setAttribute("content", nextTheme === "dark" ? "#111512" : "#f5efe4");
-
-      if (persist) {
-        window.localStorage.setItem(storageKey, nextTheme);
-      }
-
-      setTheme(nextTheme);
-    };
-
-    applyTheme(
-      document.documentElement.dataset.theme || getStoredTheme() || getPreferredTheme(),
-    );
+    const initialTheme =
+      document.documentElement.dataset.theme || getStoredTheme() || getPreferredTheme();
+    applyTheme(initialTheme);
+    setTheme(initialTheme);
 
     const handleChange = (event) => {
       if (getStoredTheme()) {
         return;
       }
 
-      applyTheme(event.matches ? "dark" : "light");
+      const nextTheme = event.matches ? "dark" : "light";
+      applyTheme(nextTheme);
+      setTheme(nextTheme);
     };
 
     mediaQuery.addEventListener("change", handleChange);
@@ -63,12 +73,7 @@ export default function ThemeToggle() {
       aria-pressed={theme === "dark"}
       onClick={() => {
         const nextTheme = theme === "dark" ? "light" : "dark";
-        document.documentElement.dataset.theme = nextTheme;
-        document.documentElement.style.colorScheme = nextTheme;
-        document
-          .querySelector('meta[name="theme-color"]')
-          ?.setAttribute("content", nextTheme === "dark" ? "#111512" : "#f5efe4");
-        window.localStorage.setItem(storageKey, nextTheme);
+        applyTheme(nextTheme, true);
         setTheme(nextTheme);
       }}
     >

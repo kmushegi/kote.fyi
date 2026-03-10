@@ -48,6 +48,12 @@
   box-sizing: border-box;
 }
 
+html.theme-changing *,
+html.theme-changing *::before,
+html.theme-changing *::after {
+  transition: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
