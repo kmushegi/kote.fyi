@@ -81,74 +81,73 @@ export default function EasterEgg() {
 
   return (
     <div className={`portrait-stack${isOpen ? " portrait-stack-open" : ""}`}>
-      <button
-        className="portrait-card portrait-trigger"
-        type="button"
-        onClick={handleTrigger}
-        aria-label="Portrait"
-      >
-        <div className="portrait-frame">
-          <img
-            src="/static/generated/kote-line-2.png"
-            alt="Illustrated portrait of Kote Mushegiani"
-          />
-        </div>
-        <p className="portrait-caption">Usually in San Francisco. Often in Georgia.</p>
-      </button>
-
-      <div
-        className={`easter-panel${isOpen ? " easter-panel-open" : ""}`}
-        aria-hidden={!isOpen}
-      >
-        <div className="easter-panel-head">
-          <div>
-            <p className="easter-label">field note 001</p>
-            <h2 className="easter-title">you found it.</h2>
+      <div className={`portrait-flip-shell${isOpen ? " portrait-flip-shell-open" : ""}`}>
+        <button
+          className="portrait-card portrait-trigger portrait-face portrait-front"
+          type="button"
+          onClick={handleTrigger}
+          aria-label="Portrait"
+        >
+          <div className="portrait-frame">
+            <img
+              src="/static/generated/kote-line-2.png"
+              alt="Illustrated portrait of Kote Mushegiani"
+            />
           </div>
-          <button
-            className="easter-close"
-            type="button"
-            onClick={() => setIsOpen(false)}
-            aria-label="Close hidden panel"
-          >
-            close
-          </button>
-        </div>
+          <p className="portrait-caption">Usually in San Francisco. Often in Georgia.</p>
+        </button>
 
-        <p className="easter-copy">
-          Small, slightly hidden things are usually more interesting. If you want, say hi.
-        </p>
-
-        <form className="easter-form" onSubmit={handleSubmit}>
-          <label className="easter-field">
-            <span>name</span>
-            <input
-              type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              maxLength={80}
-              placeholder="optional"
-            />
-          </label>
-
-          <label className="easter-field">
-            <span>message</span>
-            <textarea
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              maxLength={280}
-              rows={3}
-              placeholder="hi"
-            />
-          </label>
-
-          <div className="easter-actions">
-            <button className="easter-submit" type="submit" disabled={status === "sending"}>
-              {status === "sending" ? "sending" : "say hi"}
+        <div className="portrait-card portrait-face portrait-back" aria-hidden={!isOpen}>
+          <div className="easter-panel-head">
+            <div>
+              <p className="easter-label">field note 001</p>
+              <h2 className="easter-title">you found it.</h2>
+            </div>
+            <button
+              className="easter-close"
+              type="button"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close hidden panel"
+            >
+              close
             </button>
-            <p className={`easter-feedback easter-feedback-${status}`}>{helperCopy}</p>
           </div>
-        </form>
+
+          <p className="easter-copy">
+            Small, slightly hidden things are usually more interesting. If you want, say hi.
+          </p>
+
+          <form className="easter-form" onSubmit={handleSubmit}>
+            <label className="easter-field">
+              <span>name</span>
+              <input
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                maxLength={80}
+                placeholder="optional"
+              />
+            </label>
+
+            <label className="easter-field">
+              <span>message</span>
+              <textarea
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                maxLength={280}
+                rows={3}
+                placeholder="hi"
+              />
+            </label>
+
+            <div className="easter-actions">
+              <button className="easter-submit" type="submit" disabled={status === "sending"}>
+                {status === "sending" ? "sending" : "say hi"}
+              </button>
+              <p className={`easter-feedback easter-feedback-${status}`}>{helperCopy}</p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
