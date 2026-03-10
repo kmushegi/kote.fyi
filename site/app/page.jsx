@@ -1,3 +1,4 @@
+import EasterEgg from "../components/easter-egg";
 import ThemeToggle from "../components/theme-toggle";
 
 const year = new Date().getFullYear();
@@ -52,15 +53,7 @@ export default function Page() {
             </div>
           </div>
 
-          <aside className="portrait-card">
-            <div className="portrait-frame">
-              <img
-                src="/static/generated/kote-line-2.png"
-                alt="Illustrated portrait of Kote Mushegiani"
-              />
-            </div>
-            <p className="portrait-caption">Usually in San Francisco. Often in Georgia.</p>
-          </aside>
+          <EasterEgg />
         </section>
       </main>
 
