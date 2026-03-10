@@ -14,10 +14,9 @@ export default function Page() {
           <span className="brand-copy">kote</span>
           <span className="brand-subcopy">for your information</span>
         </a>
-        <nav className="site-nav" aria-label="Primary">
-          <a href="#links">Links</a>
+        <div className="site-nav">
           <ThemeToggle />
-        </nav>
+        </div>
       </header>
 
       <main id="top">
