@@ -205,9 +205,10 @@ main,
 }
 
 .brand-subcopy {
-  font-family: var(--font-fraunces), serif;
-  font-size: 1rem;
-  font-style: italic;
+  font-family: var(--font-cormorant-garamond), serif;
+  font-size: 1.08rem;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
   color: var(--ink-muted);
 }
 

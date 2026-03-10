@@ -1,4 +1,9 @@
-import { Fraunces, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Fraunces,
+  IBM_Plex_Mono,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -6,6 +11,13 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
   weight: ["500", "700"],
   variable: "--font-fraunces",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["500", "600"],
+  variable: "--font-cormorant-garamond",
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -62,7 +74,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${ibmPlexMono.variable} ${spaceGrotesk.variable}`}
+      className={`${fraunces.variable} ${cormorantGaramond.variable} ${ibmPlexMono.variable} ${spaceGrotesk.variable}`}
     >
       <head>
         <meta name="theme-color" content="#f5efe4" />
