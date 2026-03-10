@@ -11,3 +11,6 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 infra/terraform/app/.terraform/*.zip
+site/.next/
+site/node_modules/
+site/.vercel/
