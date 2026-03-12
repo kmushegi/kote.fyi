@@ -788,6 +788,7 @@ h1 {
     position: relative;
     z-index: 2;
     margin-right: -0.4rem;
+    pointer-events: none;
     text-shadow:
       0.02em 0 var(--paper),
       -0.02em 0 var(--paper),
@@ -818,7 +819,7 @@ h1 {
 
   .portrait-stack {
     position: absolute;
-    top: 1.9rem;
+    top: 0.95rem;
     right: 0.1rem;
     width: min(36vw, 9.25rem);
     z-index: 1;
