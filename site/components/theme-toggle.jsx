@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 const storageKey = "theme-preference";
+let warmingTimer;
 
 function getStoredTheme() {
   if (typeof window === "undefined") {
@@ -17,10 +18,12 @@ function getPreferredTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function applyTheme(nextTheme, persist = false) {
+function applyTheme(nextTheme, { persist = false, animate = false } = {}) {
   const root = document.documentElement;
 
   root.classList.add("theme-changing");
+  root.classList.remove("theme-warming");
+  window.clearTimeout(warmingTimer);
   root.dataset.theme = nextTheme;
   root.style.colorScheme = nextTheme;
   document
@@ -29,6 +32,13 @@ function applyTheme(nextTheme, persist = false) {
 
   if (persist) {
     window.localStorage.setItem(storageKey, nextTheme);
+  }
+
+  if (animate && nextTheme === "dark") {
+    root.classList.add("theme-warming");
+    warmingTimer = window.setTimeout(() => {
+      root.classList.remove("theme-warming");
+    }, 1100);
   }
 
   requestAnimationFrame(() => {
@@ -55,7 +65,7 @@ export default function ThemeToggle() {
       }
 
       const nextTheme = event.matches ? "dark" : "light";
-      applyTheme(nextTheme);
+      applyTheme(nextTheme, { animate: true });
       setTheme(nextTheme);
     };
 
@@ -73,7 +83,7 @@ export default function ThemeToggle() {
       aria-pressed={theme === "dark"}
       onClick={() => {
         const nextTheme = theme === "dark" ? "light" : "dark";
-        applyTheme(nextTheme, true);
+        applyTheme(nextTheme, { persist: true, animate: true });
         setTheme(nextTheme);
       }}
     >
