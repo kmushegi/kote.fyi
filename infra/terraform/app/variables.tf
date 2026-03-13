@@ -10,6 +10,12 @@ variable "app_name" {
   default     = "kote-fyi"
 }
 
+variable "domain_name" {
+  description = "Primary public DNS name for the site."
+  type        = string
+  default     = "kote.fyi"
+}
+
 variable "budget_alert_email" {
   description = "Email for budget alerts."
   type        = string

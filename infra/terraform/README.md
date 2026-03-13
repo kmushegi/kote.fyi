@@ -23,6 +23,11 @@ terraform apply
 
 Use the AWS profile `kote-infra-bootstrap` for both commands.
 
+DNS note:
+
+- The app stack now creates the Route 53 public hosted zone for `kote.fyi`.
+- After `terraform apply`, update the registrar nameservers at Squarespace to the four values from `terraform output route53_name_servers`.
+
 Budget note:
 
 - The `app/` stack defaults `enable_budget = false`.

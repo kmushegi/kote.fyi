@@ -17,3 +17,11 @@ output "hi_url" {
 output "table_name" {
   value = aws_dynamodb_table.site_interactions.name
 }
+
+output "route53_zone_id" {
+  value = aws_route53_zone.primary.zone_id
+}
+
+output "route53_name_servers" {
+  value = aws_route53_zone.primary.name_servers
+}
