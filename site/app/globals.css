@@ -820,11 +820,11 @@ h1 {
 
   .portrait-stack-open {
     position: fixed;
-    top: 1rem;
-    left: 50%;
-    right: auto;
-    width: min(18.5rem, calc(100vw - 1.5rem));
-    transform: translateX(-50%);
+    top: calc(env(safe-area-inset-top, 0px) + 4.75rem);
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    transform: none;
     z-index: 24;
   }
 
@@ -840,8 +840,12 @@ h1 {
   }
 
   .portrait-stack-open .portrait-back {
-    background: color-mix(in srgb, var(--paper) 96%, transparent);
+    background: color-mix(in srgb, var(--paper) 99%, transparent);
     border-color: var(--line-strong);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 5.5rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     box-shadow:
       0 1.2rem 2.6rem rgba(17, 17, 15, 0.16),
       var(--shadow);
