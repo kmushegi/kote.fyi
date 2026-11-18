@@ -3,92 +3,34 @@
 import { useEffect, useState } from "react";
 
 const storageKey = "theme-preference";
-let warmingTimer;
 
-function getStoredTheme() {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  const storedTheme = window.localStorage.getItem(storageKey);
-  return storedTheme === "light" || storedTheme === "dark" ? storedTheme : null;
+function storedTheme() {
+  try {
+    const theme = localStorage.getItem(storageKey);
+    return theme === "light" || theme === "dark" ? theme : null;
+  } catch { return null; }
 }
 
-function getPreferredTheme() {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function applyTheme(nextTheme, { persist = false, animate = false } = {}) {
-  const root = document.documentElement;
-
-  root.classList.add("theme-changing");
-  root.classList.remove("theme-warming");
-  window.clearTimeout(warmingTimer);
-  root.dataset.theme = nextTheme;
-  root.style.colorScheme = nextTheme;
-  document
-    .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", nextTheme === "dark" ? "#111512" : "#f5efe4");
-
-  if (persist) {
-    window.localStorage.setItem(storageKey, nextTheme);
-  }
-
-  if (animate && nextTheme === "dark") {
-    root.classList.add("theme-warming");
-    warmingTimer = window.setTimeout(() => {
-      root.classList.remove("theme-warming");
-    }, 1100);
-  }
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      root.classList.remove("theme-changing");
-    });
-  });
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#202722" : "#f7f4ea");
 }
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(null);
-
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const initialTheme =
-      document.documentElement.dataset.theme || getStoredTheme() || getPreferredTheme();
-    applyTheme(initialTheme);
-    setTheme(initialTheme);
-
-    const handleChange = (event) => {
-      if (getStoredTheme()) {
-        return;
-      }
-
-      const nextTheme = event.matches ? "dark" : "light";
-      applyTheme(nextTheme, { animate: true });
-      setTheme(nextTheme);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const update = (value) => { applyTheme(value); setTheme(value); };
+    update(document.documentElement.dataset.theme || storedTheme() || (media.matches ? "dark" : "light"));
+    const onChange = (event) => { if (!storedTheme()) update(event.matches ? "dark" : "light"); };
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
   }, []);
 
-  const nextThemeLabel = theme === "dark" ? "Light" : "Dark";
-
-  return (
-    <button
-      className="theme-toggle"
-      type="button"
-      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      aria-pressed={theme === "dark"}
-      onClick={() => {
-        const nextTheme = theme === "dark" ? "light" : "dark";
-        applyTheme(nextTheme, { persist: true, animate: true });
-        setTheme(nextTheme);
-      }}
-    >
-      <span className="theme-toggle-dot" aria-hidden="true"></span>
-      <span>{nextThemeLabel}</span>
-    </button>
-  );
+  return <button className="theme-toggle" type="button" aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} aria-pressed={theme === "dark"} onClick={() => {
+    const next = theme === "dark" ? "light" : "dark";
+    applyTheme(next); setTheme(next);
+    try { localStorage.setItem(storageKey, next); } catch { /* The switch still works when storage is unavailable. */ }
+  }}><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="5" /><path d="M14 2v3m0 18v3M2 14h3m18 0h3M5.5 5.5l2.2 2.2m12.6 12.6 2.2 2.2M5.5 22.5l2.2-2.2M20.3 7.7l2.2-2.2" /></svg><span className="theme-label-light">Lights off</span><span className="theme-label-dark">Lights on</span></button>;
 }
