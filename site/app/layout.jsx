@@ -34,7 +34,8 @@ const spaceGrotesk = Space_Grotesk({
 
 const themeScript = `(() => {
   const storageKey = "theme-preference";
-  const storedTheme = localStorage.getItem(storageKey);
+  let storedTheme;
+  try { storedTheme = localStorage.getItem(storageKey); } catch {}
   const theme = storedTheme === "light" || storedTheme === "dark"
     ? storedTheme
     : window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -44,7 +45,7 @@ const themeScript = `(() => {
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
 
-  const themeColor = theme === "dark" ? "#111512" : "#f5efe4";
+  const themeColor = theme === "dark" ? "#202722" : "#f7f4ea";
   document
     .querySelector('meta[name="theme-color"]')
     ?.setAttribute("content", themeColor);
@@ -77,7 +78,7 @@ export default function RootLayout({ children }) {
       className={`${fraunces.variable} ${cormorantGaramond.variable} ${ibmPlexMono.variable} ${spaceGrotesk.variable}`}
     >
       <head>
-        <meta name="theme-color" content="#f5efe4" />
+        <meta name="theme-color" content="#f7f4ea" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>{children}</body>
