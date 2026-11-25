@@ -24,7 +24,7 @@ body {
 
 .profile {
   width: min(35rem, calc(100% - 3.25rem));
-  margin: clamp(4.5rem, 19vh, 13rem) auto 4rem;
+  margin: clamp(4.5rem, 11vh, 8rem) auto 4rem;
 }
 
 .profile-heading {
@@ -72,7 +72,14 @@ button { cursor: pointer; }
 
 .bio { max-width: 32em; font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.7; color: var(--body); }
 .bio p + p { margin-top: 1.1em; }
-.bio a { color: var(--link); text-underline-offset: .17em; text-decoration-thickness: 1px; }
+.bio a, .projects a { color: var(--link); text-underline-offset: .17em; text-decoration-thickness: 1px; }
+
+.projects { margin-top: 2.5rem; }
+.projects h2 { font-size: 1.55rem; letter-spacing: -.035em; }
+.projects ul { list-style: none; margin: 1rem 0 0; padding: 0; }
+.projects li + li { margin-top: 1rem; }
+.projects li { font-size: 1rem; line-height: 1.5; }
+.projects p { margin-top: .15rem; color: var(--body); }
 
 .links {
   display: flex;
@@ -93,7 +100,7 @@ button { cursor: pointer; }
   text-decoration: none;
 }
 .contact-link { margin-left: auto; gap: .3em; color: var(--link); }
-.bio a:hover, .links > a:hover, .links button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.bio a:hover, .projects a:hover, .links > a:hover, .links button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
 
 .contact-dialog {
