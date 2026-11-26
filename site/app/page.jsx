@@ -4,22 +4,18 @@ const projects = [
   {
     name: "SF Ledger",
     url: "https://sfledger.kote.chatgpt.site",
-    description: "San Francisco’s books, from department budgets down to individual payments.",
   },
   {
     name: "Wardrobe",
     url: "https://wardrobe.kote.chatgpt.site",
-    description: "Photograph the clothes you own and put together outfits from your closet.",
   },
   {
     name: "Apartment buzzer",
     url: "https://github.com/kmushegi/iot-apartment-entry",
-    description: "Two little plungers press the buttons on my intercom so I can buzz myself in when I forget my keys.",
   },
   {
     name: "Phone for Agents",
     url: "https://github.com/kmushegi/phone-codex-plugin",
-    description: "A phone line an agent can use to call a business and book an appointment.",
   },
 ];
 
@@ -32,7 +28,6 @@ export default function Page() {
       </header>
 
       <div className="bio">
-        <p>Hi, you’ve found my home page on the internet.</p>
         <p>
           I’m Kote (<i>ko·tay</i> in English, <i>ko·te</i> in Georgian).
           I grew up in Tbilisi, Georgia, went to Bowdoin College in Maine,
@@ -41,10 +36,11 @@ export default function Page() {
           to train agents with reinforcement learning and run them in production.
         </p>
         <p>
-          At Bowdoin, I used classical computer vision to help our RoboCup
-          robot, an Aldebaran NAO, spot the soccer ball and score us goals. I got into deep
-          learning at Toyota Research Institute and later cofounded Komodo to
-          help developers train and deploy models.
+          At Bowdoin, I used classical computer vision to help our RoboCup robot
+          spot a soccer ball. I got into deep learning at Toyota Research Institute,
+          where I worked on robots that chose their own training images and a way
+          for a robot to find its bearings by looking at a pattern of light on
+          the ceiling. Later, I cofounded Komodo to help developers train and deploy models.
         </p>
         <p>
           Outside of work, I like tinkering with electronics, playing tennis, and skiing.
@@ -54,10 +50,9 @@ export default function Page() {
       <section className="projects" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
         <ul role="list">
-          {projects.map(({ name, url, description }) => (
+          {projects.map(({ name, url }) => (
             <li key={url}>
               <a href={url}>{name}</a>
-              <p>{description}</p>
             </li>
           ))}
         </ul>
