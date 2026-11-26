@@ -33,14 +33,17 @@ export default function Page() {
       </header>
 
       <div className="bio">
+        <p>Hi, you’ve found my home page on the internet.</p>
         <p>
-          I’m from Tbilisi, Georgia, and live in San Francisco. At{" "}
-          <a href="https://openai.com/">OpenAI</a>, I build the infrastructure
-          we use to train agents with reinforcement learning and run them.
+          I’m Kote (<i>ko·tay</i> in English, <i>ko·te</i> in Georgian).
+          I grew up in Tbilisi, Georgia, went to Bowdoin College in Maine,
+          and now live in San Francisco. At{" "}
+          <a href="https://openai.com/">OpenAI</a>, I build the software we use
+          to train agents with reinforcement learning and run them in production.
         </p>
         <p>
-          At Bowdoin, I wrote classical computer vision code so our RoboCup
-          robot, an Aldebaran NAO, could spot a soccer ball. I got into deep
+          At Bowdoin, I used classical computer vision to help our RoboCup
+          robot, an Aldebaran NAO, spot the soccer ball and score us goals. I got into deep
           learning at Toyota Research Institute and later cofounded Komodo to
           help developers train and deploy models.
         </p>
