@@ -1,4 +1,3 @@
-import Contact from "../components/contact";
 import ThemeToggle from "../components/theme-toggle";
 
 const projects = [
@@ -64,11 +63,10 @@ export default function Page() {
         </ul>
       </section>
 
-      <nav className="links" aria-label="Profiles and contact">
+      <nav className="links" aria-label="Social profiles">
         <a href="https://github.com/kmushegi">GitHub</a>
         <a href="https://www.linkedin.com/in/kmushegi/">LinkedIn</a>
         <a href="https://x.com/kmushegi">X</a>
-        <Contact />
       </nav>
     </main>
   );

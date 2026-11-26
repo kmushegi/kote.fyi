@@ -54,9 +54,8 @@ h1 {
   color: var(--quiet);
 }
 
-button, input, textarea { font: inherit; color: inherit; }
-button { cursor: pointer; }
-.theme-toggle, .contact-link, .contact-close {
+button { font: inherit; cursor: pointer; }
+.theme-toggle {
   border: 0;
   background: transparent;
   padding: 0;
@@ -92,54 +91,15 @@ button { cursor: pointer; }
   color: var(--quiet);
   font-size: .875rem;
 }
-.links > a { color: inherit; }
-.links > a, .contact-link {
+.links > a {
+  color: inherit;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
   text-decoration: none;
 }
-.contact-link { margin-left: auto; gap: .3em; color: var(--link); }
-.bio a:hover, .projects a:hover, .links > a:hover, .links button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.bio a:hover, .projects a:hover, .links > a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
-
-.contact-dialog {
-  width: min(25rem, calc(100% - 2rem));
-  max-height: calc(100dvh - 2rem);
-  padding: clamp(1.4rem, 6vw, 2rem);
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: var(--paper);
-  color: var(--ink);
-  font-size: 1rem;
-}
-.contact-dialog::backdrop { background: rgb(15 17 15 / 42%); }
-.contact-heading, .contact-actions { display: flex; align-items: center; gap: 1rem; }
-.contact-heading { justify-content: space-between; }
-.contact-heading h2 { font-size: 1.8rem; letter-spacing: -.04em; }
-.contact-close { color: var(--quiet); font-size: .875rem; min-height: 44px; }
-.contact-form { display: grid; gap: 1.1rem; margin-top: 1.35rem; }
-.contact-form label { display: grid; gap: .4rem; font-size: .875rem; }
-.contact-form input, .contact-form textarea {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: .6rem .7rem;
-  background: var(--paper);
-  font-size: 1rem;
-  line-height: 1.45;
-}
-.contact-form textarea { resize: vertical; }
-.contact-submit {
-  border: 0;
-  border-radius: 3px;
-  color: var(--paper);
-  background: var(--ink);
-  padding: .65rem 1rem;
-}
-.links .contact-submit:hover { color: var(--paper); }
-.contact-submit:disabled { opacity: .65; cursor: wait; }
-.contact-status { font-size: .85rem; line-height: 1.5; color: var(--quiet); }
 
 @media (max-width: 420px) {
   .profile { margin-top: 4rem; }
